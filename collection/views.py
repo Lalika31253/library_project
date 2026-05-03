@@ -26,6 +26,7 @@ class LocationDetailView(DetailView):
         ctx = super().get_context_data(**kwargs)
         # location.books uses the related_name we set on Book.location
         ctx['books']    = self.object.books.all().select_related('visitor')
+        ctx['visitors'] = self.object.visitors.all()
         return ctx
 
 
@@ -57,6 +58,12 @@ class BookDeleteView(DeleteView):
     model         = Book
     template_name = 'collection/book_confirm_delete.html'
     success_url   = reverse_lazy('book-list')
+
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name = 'collection/book_detail.html'
+    context_object_name = 'book'
 
 
 # ── HTMX: live search (returns a partial HTML fragment) ────────────────────

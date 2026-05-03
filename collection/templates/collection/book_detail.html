@@ -1,0 +1,16 @@
+{% extends 'collection/base.html' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ book.title }}</h1>
+
+<p><strong>Author:</strong> {{ book.author }}</p>
+<p><strong>Category:</strong> {{ book.get_category_display }}</p>
+<p><strong>Location:</strong> {{ book.location }}</p>
+<p><strong>Visitor:</strong> {{ book.visitor }}</p>
+
+<a href="{% url 'book-list' %}">← Back to books</a>
+
+{% endblock %}

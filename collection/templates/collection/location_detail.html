@@ -34,7 +34,11 @@
   {% for book in books %}
     <tr id="book-{{ book.pk }}">
       <td>{{ book.author }}</td>
-      <td>{{ book.title }}</td>
+      <td>
+        <a href="{% url 'book-detail' book.pk %}">
+          {{ book.author }} — {{ book.title }}
+        </a>
+      </td>
       <td>{{ book.get_category_display }}</td>
       <td>{{ book.visitor }}</td>
       <td>

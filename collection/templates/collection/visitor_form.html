@@ -1,0 +1,33 @@
+{% extends 'collection/base.html' %}
+
+{% block title %}
+  {% if object %}Edit Visitor{% else %}Add Visitor{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<h1>
+  {% if object %}
+    Edit Visitor: {{ object }}
+  {% else %}
+    Add New Visitor
+  {% endif %}
+</h1>
+
+<form method="post">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+  <div style="margin-top: 15px;">
+    <button type="submit">
+      {% if object %}Update{% else %}Create{% endif %}
+    </button>
+
+    <a href="{% url 'visitor-list' %}" style="margin-left: 10px;">
+      Cancel
+    </a>
+  </div>
+</form>
+
+{% endblock %}

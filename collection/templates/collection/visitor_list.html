@@ -1,0 +1,47 @@
+{% extends 'collection/base.html' %}
+
+{% block title %}Visitors{% endblock %}
+
+{% block content %}
+
+<h1>Visitors</h1>
+
+<a href="{% url 'visitor-create' %}">+ Add Visitor</a>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Locations</th>
+    <th>Actions</th>
+  </tr>
+
+  {% for visitor in visitors %}
+    <tr>
+      <td>
+        <a href="{% url 'visitor-detail' visitor.pk %}">
+          {{ visitor }}
+        </a>
+      </td>
+
+      <td>
+        {% for location in visitor.locations.all %}
+          {{ location.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+          No locations
+        {% endfor %}
+      </td>
+
+      <td>
+        <a href="{% url 'visitor-update' visitor.pk %}">Edit</a> |
+        <a href="{% url 'visitor-delete' visitor.pk %}">Delete</a>
+      </td>
+    </tr>
+  {% empty %}
+    <tr>
+      <td colspan="3">No visitors found.</td>
+    </tr>
+  {% endfor %}
+
+</table>
+
+{% endblock %}

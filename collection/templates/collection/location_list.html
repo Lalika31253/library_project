@@ -1,0 +1,13 @@
+{% extends 'collection/base.html' %}
+{% block title %}Locations{% endblock %}
+{% block content %}
+<h1>Our Locations</h1>
+<ul>
+  {% for location in locations %}
+    <li>
+      <a href="{% url 'location-detail' location.pk %}">{{ location }}</a>
+      &mdash; Opened: {{ location.opened_date|date:"M d, Y" }}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

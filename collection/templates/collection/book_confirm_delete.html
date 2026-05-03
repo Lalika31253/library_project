@@ -1,0 +1,22 @@
+{% extends 'collection/base.html' %}
+
+{% block title %}Delete Book{% endblock %}
+
+{% block content %}
+
+<h1>Delete "{{ object.title }}"?</h1>
+
+<p>
+  You are about to delete <strong>{{ object.title }}</strong>
+  by <strong>{{ object.author }}</strong>.
+</p>
+
+<p>This action cannot be undone.</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes, delete</button>
+  <a href="{% url 'book-list' %}">Cancel</a>
+</form>
+
+{% endblock %}

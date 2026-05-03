@@ -1,0 +1,31 @@
+{% extends 'collection/base.html' %}
+
+{% block title %}{{ visitor }}{% endblock %}
+
+{% block content %}
+<h1>{{ visitor.first_name }} {{ visitor.last_name }}</h1>
+
+<h2>Locations</h2>
+<ul>
+  {% for location in visitor.locations.all %}
+    <li>
+      <a href="{% url 'location-detail' location.pk %}">
+        {{ location.name }}
+      </a>
+    </li>
+  {% empty %}
+    <li>No locations assigned.</li>
+  {% endfor %}
+</ul>
+
+<h2>Books Managed</h2>
+<ul>
+  {% for book in books %}
+    <li>{{ book.author }} - {{ book.title }} ({{ book.location.name }})</li>
+  {% empty %}
+    <li>No books managed.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'visitor-list' %}">Back</a>
+{% endblock %}

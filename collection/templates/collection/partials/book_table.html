@@ -1,0 +1,39 @@
+{# This template renders with NO extends — it is a fragment, not a full page #}
+<table border="1">
+  <tr>
+    <th>Author</th>
+    <th>Title</th>
+    <th>Location</th>
+    <th>Visitor</th>
+    <th>Actions</th>
+  </tr>
+
+  {% for book in books %}
+    <tr id="book-{{ book.pk }}">
+      
+      <td>{{ book.author }}</td>
+
+      <td>{{ book.title }}</td>
+
+      <td>
+        <a href="{% url 'location-detail' book.location.pk %}">
+          {{ book.location.name }}
+        </a>
+      </td>
+
+      <td>
+        {{ book.visitor }}
+      </td>
+
+      <td>
+        <a href="{% url 'book-update' book.pk %}">Edit</a> |
+        <a href="{% url 'book-delete' book.pk %}">Delete</a>
+      </td>
+
+    </tr>
+  {% empty %}
+    <tr>
+      <td colspan="5">No books found.</td>
+    </tr>
+  {% endfor %}
+</table>

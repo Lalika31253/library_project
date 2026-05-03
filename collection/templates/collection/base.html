@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Library{% endblock %}</title>
+</head>
+<!-- hx-headers sends the CSRF token with every HTMX request -->
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <nav>
+    <a href="{% url 'location-list' %}">Locations</a> |
+    <a href="{% url 'book-list' %}">Books</a> |
+    <a href="{% url 'visitor-list' %}">Visitorss</a>
+  </nav>
+  <hr>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- HTMX from CDN — no installation needed -->
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</body>
+</html>

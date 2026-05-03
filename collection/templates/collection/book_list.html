@@ -1,0 +1,38 @@
+{% extends 'collection/base.html' %}
+
+{% block title %}All Books{% endblock %}
+
+{% block content %}
+
+<h1>All Books</h1>
+
+<a href="{% url 'book-create' %}">+ Add Book</a>
+
+<!--
+  hx-get      → the URL HTMX calls
+  hx-trigger  → fires on keyup with 300 ms debounce
+  hx-target   → the element whose HTML gets replaced
+  hx-swap     → replace the inner HTML of the target
+-->
+<form>
+  <input
+    type="search"
+    name="q"
+    placeholder="Search by author, book name or location..."
+    hx-get="{% url 'book-search' %}"
+    hx-trigger="keyup changed delay:300ms"
+    hx-target="#book-results"
+    hx-swap="innerHTML"
+    hx-indicator="#loading"
+  >
+</form>
+
+<div id="loading" class="htmx-indicator">
+  Searching...
+</div>
+
+<div id="book-results">
+  {% include 'collection/partials/book_table.html' %}
+</div>
+
+{% endblock %}
